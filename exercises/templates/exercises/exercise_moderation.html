@@ -1,0 +1,23 @@
+{% extends 'exercises/base.html' %}
+
+{% block content %}
+  <h1>Moderate Exercises</h1>
+  {% if exercises %}
+    <ul>
+      {% for exercise in exercises %}
+        <li>
+          <strong>{{ exercise.title }}</strong> by {{ exercise.author.username }}
+          <p>{{ exercise.description }}</p>
+          <form method="post" action="{% url 'exercise-approval' exercise.pk %}">
+            {% csrf_token %}
+            <button type="submit" name="approve" value="1">Approve</button>
+            <button type="submit" name="reject" value="1">Reject</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No exercises awaiting approval.</p>
+  {% endif %}
+{% endblock content %}
+

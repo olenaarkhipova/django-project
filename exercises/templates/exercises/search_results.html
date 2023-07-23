@@ -1,0 +1,23 @@
+{% extends 'exercises/base.html' %}
+
+{% block content %}
+<h1>Search Results</h1>
+
+<form class="d-flex" role="search" method="GET" action="{% url 'exercise-search' %}">
+    {{ form }}
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+{% if results %}
+    <ul>
+    {% for exercise in results %}
+        <li>
+            <a href="{% url 'exercises-detail' exercise.pk %}">{{ exercise.title }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No results found.</p>
+{% endif %}
+
+{% endblock content %}
