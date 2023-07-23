@@ -1,0 +1,15 @@
+{% extends 'exercises/base.html' %}
+
+{% block title %}
+    Exercise Approval Success
+{% endblock title %}
+
+{% block content %}
+    <div class="alert alert-success mt-4">
+        <h3>Success!</h3>
+        <p>The exercise is added to the database.</p>
+        <p>Thank you for approving the exercise.</p>
+        <a class="btn btn-outline-primary" href="{% url 'exercise-moderation' %}">Go back to moderation page</a>
+    </div>
+{% endblock content %}
+
