@@ -1,23 +1,29 @@
 {% extends 'exercises/base.html' %}
 
 {% block content %}
-<h1>Search Results</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="my-4">Search Results</h1>
 
-<form class="d-flex" role="search" method="GET" action="{% url 'exercise-search' %}">
-    {{ form }}
-    <button class="btn btn-outline-success" type="submit">Search</button>
-</form>
+                <form class="form-inline my-4" role="search" method="GET" action="{% url 'exercise-search' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }} <!-- Display the search input field without the label -->
+                    <button class="btn btn-outline-success ml-2" type="submit">Search</button>
+                </form>
 
-{% if results %}
-    <ul>
-    {% for exercise in results %}
-        <li>
-            <a href="{% url 'exercises-detail' exercise.pk %}">{{ exercise.title }}</a>
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No results found.</p>
-{% endif %}
-
+                {% if results %}
+                    <ul class="list-group">
+                    {% for exercise in results %}
+                        <li class="list-group-item">
+                            <a href="{% url 'exercises-detail' exercise.pk %}">{{ exercise.title }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No results found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock content %}

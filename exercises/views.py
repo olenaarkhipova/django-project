@@ -119,10 +119,12 @@ class ExerciseApprovalView(View):
 
         if 'approve' in request.POST:
             exercise.status = 'approved'
+            exercise.is_approved = True
             exercise.save()
             return redirect(reverse('exercise-approval-success', args=[pk]))
         elif 'reject' in request.POST:
             exercise.status = 'rejected'
+            exercise.is_approved = False
             exercise.save()
 
         return redirect('exercise-moderation')
