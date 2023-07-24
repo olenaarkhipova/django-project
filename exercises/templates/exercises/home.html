@@ -1,21 +1,25 @@
 {% extends 'exercises/base.html' %}
 <!-- -->
 {% block content %}
-<h1>Workouts App Home</h1>
-{% for exercise in exercises %}
-    <div class="card my-4" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">{{ exercise.title }}</h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary">{{ exercise.category }}</h6>
-            <h6 class="card-subtitle mb-2 text-body-secondary">{{ exercise.author }}</h6>
-            <p class="card-text">{{ exercise.equipment }}</p>
-            <p class="card-text">{{ exercise.description }}</p>
-            {% if exercise.photo %}
-                <img src="{{ exercise.photo.url }}" alt="{{ exercise.title }}" class="card-img-top" style="margin-bottom: 10px;">
-            {% endif %}
-            <h6 class="card-subtitle mb-2 text-body-secondary">{{ exercise.updated_at|date:"F d, Y" }}</h6>
-            <a href="{% url 'exercises-detail' exercise.pk %}" class="card-link">View Exercise</a>
-        </div>
+    <h1 style="margin-bottom: 20px;">Workouts App Home</h1>
+    <div class="row">
+        {% for exercise in exercises %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ exercise.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ exercise.category }}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ exercise.author }}</h6>
+                        <p class="card-text">{{ exercise.equipment }}</p>
+                        <p class="card-text">{{ exercise.description }}</p>
+                        {% if exercise.photo %}
+                            <img src="{{ exercise.photo.url }}" alt="{{ exercise.title }}" class="card-img-top" style="margin-bottom: 10px;">
+                        {% endif %}
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ exercise.updated_at|date:"F d, Y" }}</h6>
+                        <a href="{% url 'exercises-detail' exercise.pk %}" class="card-link">View Exercise</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-{% endfor %}
 {% endblock content %}
